@@ -1,16 +1,10 @@
-# Iniciando a aplicação Gobarber
+## Iniciando a aplicação Gobarber
 
 <strong>Definindo estrutura</strong>
 
--- yarn init
--- yarn add express
-
---- gobarber
----- src
------ app.js
------ server.js
------ routes.js
+- `yarn init`
+- `yarn add express`
 
 <strong>Instlando Nodemon & Sucrase</strong>
 
--- yarn add sucrase nodemon -D
+- `yarn add sucrase nodemon -D`
