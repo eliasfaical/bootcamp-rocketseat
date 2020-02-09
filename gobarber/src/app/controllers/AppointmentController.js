@@ -1,10 +1,42 @@
 import * as Yup from 'yup';
 import { startOfHour, parseISO, isBefore } from 'date-fns';
 import User from '../models/User';
+import File from '../models/File';
 import Appointment from '../models/Appointment';
 
 class AppointmentController {
+  /**
+   * Listando agendamentos de usuários
+   */
+  async index(req, res) {
+    const appointments = await Appointment.findAll({
+      where: { user_id: req.userId, canceled_at: null },
+      order: ['date'],
+      attributes: ['id', 'date'],
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          attributes: ['id', 'name'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['id', 'path', 'url'],
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.json(appointments);
+  }
+
+  /**
+   * Agendamento de serviços
+   */
   async store(req, res) {
+    // Validação usando Yup
     const schema = Yup.object().shape({
       provider_id: Yup.number().required(),
       date: Yup.date().required(),
@@ -27,6 +59,7 @@ class AppointmentController {
         .json({ error: 'Você só pode criar agendamentos se for um provider' });
     }
 
+    // Validação usando date-fns
     // Checa se a data já passou
     const hourStart = startOfHour(parseISO(date));
 
@@ -34,6 +67,7 @@ class AppointmentController {
       return res.status(400).json({ error: 'Está data não é permitida.' });
     }
 
+    // Validação usando date-fns
     // Checa se a data/horário está disponível
     const checkAvailability = await Appointment.findOne({
       where: {
