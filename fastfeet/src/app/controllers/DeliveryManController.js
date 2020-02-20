@@ -6,17 +6,17 @@ class DeliveryManController {
   // Listar
   async index(req, res) {
     const deliverymans = await DeliveryMan.findAll({
-      attributes: ['id', 'name', 'email'],
+      attributes: ['id', 'name', 'email', 'avatar_id'],
       include: [
         {
           model: File,
           as: 'avatar',
-          attributes: ['id', 'url', 'path'],
+          attributes: ['name', 'path', 'url'],
         },
       ],
     });
 
-    return res.status(200).json(deliverymans);
+    return res.json(deliverymans);
   }
 
   // Cadastrar
