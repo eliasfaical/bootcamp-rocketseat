@@ -1,7 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 
 class Order extends Model {
-  async init(sequelize) {
+  static init(sequelize) {
     super.init(
       {
         product: Sequelize.STRING,

@@ -16,6 +16,7 @@ class Destinatarios extends Model {
         sequelize,
       }
     );
+    return this;
   }
 }
 
