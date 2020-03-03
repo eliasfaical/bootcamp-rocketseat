@@ -17,10 +17,17 @@ const upload = multer(multerConfig);
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 
+// Todas as rotas após 'use(authMiddleware)' precisam enviar um jsonwebtoken(jwt)
+// Criado no SessionController, o token é uma forma de autenticação de usuários.
+// Daqui em diante apenas usuários autenticados podem acessar essas rotas
 routes.use(authMiddleware);
 
 routes.put('/users', UserController.update);
+
 routes.post('/destinatarios', DestinatarioController.store);
+routes.get('/destinatarios', DestinatarioController.index);
+routes.put('/destinatarios/:id', DestinatarioController.update);
+routes.delete('/destinatarios/:id', DestinatarioController.delete);
 
 routes.get('/deliveryman', DeliveryManController.index);
 routes.post('/deliveryman', DeliveryManController.store);

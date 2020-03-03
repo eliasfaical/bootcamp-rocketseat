@@ -47,12 +47,6 @@ class OrdersController {
       return res.status(400).json({ error: 'Validation Fails' });
     }
 
-    // const order = await Order.findByPk(req.params.id);
-
-    // if (!order) {
-    //   return res.status(400).json({ error: 'Encomanda já foi cadastrada' });
-    // }
-
     const {
       id,
       product,

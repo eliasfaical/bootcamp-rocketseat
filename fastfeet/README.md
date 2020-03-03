@@ -32,3 +32,7 @@
 - `yarn add sequelize-cli -D`
 
 - `yarn add pg pg-hstore`: dialect do postgres
+
+<hr>
+
+- `yarn add date-fns@next`
