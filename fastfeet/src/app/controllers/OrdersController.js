@@ -7,6 +7,8 @@ import DeliveryMan from '../models/DeliveryMan';
 import Destinatarios from '../models/Destinatarios';
 import File from '../models/File';
 
+import Notification from '../schema/Notification';
+
 class OrdersController {
   // Listar
   async index(req, res) {
@@ -82,6 +84,12 @@ class OrdersController {
       product,
       recipient_id,
       deliveryman_id,
+    });
+
+    // Notifica o entregador que tem uma nova encomenda cadastrada
+    await Notification.create({
+      content: `Nova encomenda cadastrada para entrega - Produto: ${product}, Entregador: ${deliveryman.name}, Endereço: ${recipient.rua} - ${recipient.cep}`,
+      user: deliveryman_id,
     });
 
     return res.json(packageOrder);

@@ -5,6 +5,12 @@ import multerConfig from './config/multer';
 import UserController from './app/controllers/UserController';
 import DestinatarioController from './app/controllers/DestinatarioController';
 import DeliveryManController from './app/controllers/DeliveryManController';
+
+import DeliveryOrderController from './app/controllers/DeliveryOrderController';
+import DeliveryOrderConcludController from './app/controllers/DeliveryOrderConcludController';
+
+import DeliveryManStartController from './app/controllers/DeliveryManStartController';
+
 import OrdersController from './app/controllers/OrdersController';
 import SessionController from './app/controllers/SessionController';
 import authMiddleware from './app/middlewares/auth';
@@ -16,6 +22,14 @@ const upload = multer(multerConfig);
 
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
+
+routes.get('/deliveryman/:id/orders', DeliveryOrderController.index);
+routes.get(
+  '/deliveryman/:id/orders/concluded',
+  DeliveryOrderConcludController.index
+);
+
+routes.put('/deliveries/:id/start', DeliveryManStartController.update);
 
 // Todas as rotas após 'use(authMiddleware)' precisam enviar um jsonwebtoken(jwt)
 // Criado no SessionController, o token é uma forma de autenticação de usuários.
