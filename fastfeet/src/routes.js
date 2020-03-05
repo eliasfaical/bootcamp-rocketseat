@@ -29,6 +29,7 @@ routes.get(
   DeliveryOrderConcludController.index
 );
 
+// Atualizar data de inicio da encomenda
 routes.put('/deliveries/:id/start', DeliveryManStartController.update);
 
 // Todas as rotas após 'use(authMiddleware)' precisam enviar um jsonwebtoken(jwt)
@@ -47,6 +48,9 @@ routes.get('/deliveryman', DeliveryManController.index);
 routes.post('/deliveryman', DeliveryManController.store);
 routes.put('/deliveryman/:id', DeliveryManController.update);
 routes.delete('/deliveryman/:id', DeliveryManController.delete);
+
+// Listar encomenda iniciada
+routes.get('/deliveries/start', DeliveryManStartController.index);
 
 routes.post('/orders', OrdersController.store);
 routes.get('/orders', OrdersController.index);

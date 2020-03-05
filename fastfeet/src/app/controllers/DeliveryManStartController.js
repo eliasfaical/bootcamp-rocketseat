@@ -2,8 +2,59 @@ import { startOfDay, endOfDay, addHours } from 'date-fns';
 import { Op } from 'sequelize';
 
 import Order from '../models/Order';
+import DeliveryMan from '../models/DeliveryMan';
+import Destinatarios from '../models/Destinatarios';
+import File from '../models/File';
 
 class DeliveryManStartController {
+  /**
+   * Listar encomendas iniciadas
+   */
+  async index(req, res) {
+    const { page = 1 } = req.query;
+
+    const order = await Order.findAll({
+      where: {
+        [Op.not]: { start_date: null },
+        end_date: null,
+        canceled_at: null,
+      },
+      attributes: ['id', 'product'],
+      limit: 10,
+      offset: (page - 1) * 10,
+      include: [
+        {
+          model: DeliveryMan,
+          as: 'deliveryman',
+          attributes: ['name', 'email'],
+        },
+        {
+          model: Destinatarios,
+          as: 'recipient',
+          attributes: [
+            'name',
+            'rua',
+            'numero',
+            'complemento',
+            'estado',
+            'cidade',
+            'cep',
+          ],
+        },
+        {
+          model: File,
+          as: 'signature',
+          attributes: ['url', 'path'],
+        },
+      ],
+    });
+
+    return res.json(order);
+  }
+
+  /**
+   * Atualiza hora de inicio da entrega de encomenda
+   */
   async update(req, res) {
     const order = await Order.findByPk(req.params.id);
 
