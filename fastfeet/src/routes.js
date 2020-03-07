@@ -10,6 +10,9 @@ import DeliveryOrderController from './app/controllers/DeliveryOrderController';
 import DeliveryOrderConcludController from './app/controllers/DeliveryOrderConcludController';
 
 import DeliveryManStartController from './app/controllers/DeliveryManStartController';
+import DeliveryManEndController from './app/controllers/DeliveryManEndController';
+
+import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 
 import OrdersController from './app/controllers/OrdersController';
 import SessionController from './app/controllers/SessionController';
@@ -29,8 +32,11 @@ routes.get(
   DeliveryOrderConcludController.index
 );
 
+routes.post('/delivery/:id/problems', DeliveryProblemController.store);
+
 // Atualizar data de inicio da encomenda
-routes.put('/deliveries/:id/start', DeliveryManStartController.update);
+routes.put('/deliveries/:id/start-date', DeliveryManStartController.update);
+routes.put('/deliveries/:id/end-date', DeliveryManEndController.update);
 
 // Todas as rotas após 'use(authMiddleware)' precisam enviar um jsonwebtoken(jwt)
 // Criado no SessionController, o token é uma forma de autenticação de usuários.
@@ -49,8 +55,12 @@ routes.post('/deliveryman', DeliveryManController.store);
 routes.put('/deliveryman/:id', DeliveryManController.update);
 routes.delete('/deliveryman/:id', DeliveryManController.delete);
 
-// Listar encomenda iniciada
-routes.get('/deliveries/start', DeliveryManStartController.index);
+// Encomenda comdata inicial e final
+routes.get('/deliveries/start-date', DeliveryManStartController.index);
+routes.get('/deliveries/end-date', DeliveryManEndController.index);
+
+routes.get('/problems', DeliveryProblemController.index);
+routes.get('/delivery/:id/problems', DeliveryProblemController.show);
 
 routes.post('/orders', OrdersController.store);
 routes.get('/orders', OrdersController.index);

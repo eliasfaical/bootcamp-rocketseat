@@ -2,12 +2,15 @@ import * as Yup from 'yup';
 import { parseISO, isAfter } from 'date-fns';
 
 import Order from '../models/Order';
-
 import DeliveryMan from '../models/DeliveryMan';
 import Destinatarios from '../models/Destinatarios';
 import File from '../models/File';
 
 import Notification from '../schema/Notification';
+
+import NewDeliveryMail from '../jobs/NewDeliveryMail';
+import CancellationMail from '../jobs/CancellationMail';
+import Queue from '../../lib/Queue';
 
 class OrdersController {
   // Listar
@@ -60,7 +63,7 @@ class OrdersController {
 
     // Validação de destinatário
     const recipient = await Destinatarios.findByPk(recipient_id, {
-      attributes: ['id', 'rua', 'cep'],
+      attributes: ['id', 'name', 'rua', 'cep'],
     });
 
     if (!recipient) {
@@ -90,6 +93,12 @@ class OrdersController {
     await Notification.create({
       content: `Nova encomenda cadastrada para entrega - Produto: ${product}, Entregador: ${deliveryman.name}, Endereço: ${recipient.rua} - ${recipient.cep}`,
       user: deliveryman_id,
+    });
+
+    await Queue.add(NewDeliveryMail.key, {
+      recipient,
+      deliveryman,
+      product,
     });
 
     return res.json(packageOrder);
@@ -171,13 +180,31 @@ class OrdersController {
     }
 
     const { id } = req.params;
-    const order = await Order.findByPk(id);
+    const order = await Order.findByPk(id, {
+      include: [
+        {
+          model: DeliveryMan,
+          as: 'deliveryman',
+          attributes: ['name', 'email'],
+        },
+        {
+          model: Destinatarios,
+          as: 'recipient',
+          attributes: ['name', 'rua', 'cep'],
+        },
+      ],
+    });
 
     if (!order) {
       return res.status(400).json({ error: 'Encomenda invalída' });
     }
 
     await order.destroy();
+
+    await Queue.add(CancellationMail.key, {
+      order,
+    });
+
     return res.json({
       message: 'Encomenda deletada com sucesso!',
     });
