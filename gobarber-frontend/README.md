@@ -1,0 +1,14 @@
+#### Criando estrutura inicial
+- `yarn init -y`
+
+#### Instalando babel, react e webpack
+- `yarn add @babel/core @babel/preset-env @babel/preset-react webpack webpack-cli`
+
+#### Instalando react-dom
+- `yarn add react react-dom`
+
+#### Instalando babel-loader como dependência de desenvolvimento
+- `yarn add babel-loader -D`
+
+#### Instalando webpack-dev-server
+- `yarn add webpack-dev-server -D`
