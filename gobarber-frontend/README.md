@@ -12,3 +12,6 @@
 
 #### Instalando webpack-dev-server
 - `yarn add webpack-dev-server -D`
+
+#### Instalando CSS loader
+- `yarn add style-loader css-loader -D`
