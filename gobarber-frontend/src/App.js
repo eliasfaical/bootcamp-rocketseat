@@ -1,8 +1,10 @@
 import React from 'react';
 import './App.css';
 
+import profile from './assets/eu.jpg';
+
 function App() {
-  return <h1>Hello ReactJS</h1>
+  return <img src={profile} />
 }
 
 export default App;

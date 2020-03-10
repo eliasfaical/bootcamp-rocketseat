@@ -15,3 +15,6 @@
 
 #### Instalando CSS loader
 - `yarn add style-loader css-loader -D`
+
+#### Instalando IMAGE loader
+- `yarn dev file-loader -D`
