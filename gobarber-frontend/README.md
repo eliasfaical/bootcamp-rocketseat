@@ -18,3 +18,6 @@
 
 #### Instalando IMAGE loader
 - `yarn dev file-loader -D`
+
+#### Plugon que altera a forma de declarar states
+- `yarn add @babel/plugin-proposal-class-properties -D`
