@@ -1,0 +1,12 @@
+.PostList {
+  border: 1px solid greenyellow;
+}
+
+.PostList .container {
+  flex-direction: column;
+  align-items: flex-start
+}
+
+.PostList .postItem {
+  flex-direction: column;
+}

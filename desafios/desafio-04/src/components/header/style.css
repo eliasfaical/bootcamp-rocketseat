@@ -1,0 +1,27 @@
+.site-header {
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem 1rem;
+  background-color: #4A90E2;
+}
+
+.site-header h1 {
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.site-header .btn-perfil {
+  color: #fff;
+  text-decoration: none;
+}
+
+.site-header.ico-perfil {
+  display: inline-block;
+  vertical-align: bottom;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-left: .5rem;
+  background: #fff;
+}
