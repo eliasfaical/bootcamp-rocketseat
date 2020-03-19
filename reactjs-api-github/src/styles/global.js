@@ -34,6 +34,7 @@ export default createGlobalStyle`
   body {
     line-height: 1.4;
     background: #7159c1;
+    font-family: Arial, Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased !important
   }
   ol, ul {
