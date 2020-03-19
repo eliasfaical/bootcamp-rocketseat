@@ -1,24 +1,5 @@
 import styled, { keyframes, css } from 'styled-components';
 
-export const Container = styled.div`
-  background: #fff;
-  padding: 2rem 1.5rem;
-  border-radius: 4px;
-  max-width: 800px;
-  margin: 2rem auto;
-
-  h1 {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: 20px;
-
-    svg {
-      margin-right: 10px;
-    }
-  }
-`;
-
 export const Form = styled.form`
   margin-top: 1rem;
   display: flex;
