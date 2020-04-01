@@ -46,6 +46,10 @@ export const ProductTable = styled.table`
     border-bottom: 1px solid #eee;
   }
 
+  img {
+    max-width: 100px;
+  }
+
   strong {
     color: #333;
     display: block;
