@@ -1,4 +1,4 @@
-Configurando projeto
+# Configurando projeto
 
 eslint, prettier
 #### `yarn add eslint -D`
@@ -18,3 +18,16 @@ Instalando modulo para navegação de pastas
 #### `yarn add customize-cra react-app-rewired`
 #### `yarn add babel-plugin-root-import -D`
 #### `yarn add eslint-import-resolver-babel-plugin-root-import -D`
+
+<hr>
+
+# Cadastro e autenticação de usuários
+
+A lightweight toolset for writing styles in JavaScript
+#### `yarn add polished`
+
+Utilizando Unform
+#### `yarn add @rocketseat/unform`
+
+Validações
+#### `yarn add yup`

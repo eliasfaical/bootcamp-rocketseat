@@ -2,18 +2,17 @@ import 'react-native-gesture-handler';
 
 import React from 'react';
 import {StatusBar} from 'react-native';
+import {Provider} from 'react-redux';
 
-import {NavigationContainer} from '@react-navigation/native';
+// import store from './store';
 
 import Routes from './routes';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <>
-        <StatusBar barStyle="light-content" backgroundColor="#7159c1" />
-        <Routes />
-      </>
-    </NavigationContainer>
+    <>
+      <StatusBar backgroundColor="#191920" />
+      <Routes />
+    </>
   );
 }

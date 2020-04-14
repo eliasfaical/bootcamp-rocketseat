@@ -1,14 +1,27 @@
 import React from 'react';
+import {Text} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {Wrapper, Container, Logo, BoxIconCart, Cart, CountItem} from './styles';
+import {
+  Wrapper,
+  Container,
+  Logo,
+  BoxIconCart,
+  CountItem,
+  ButtonLogo,
+} from './styles';
 
-function Header() {
+Icon.loadFont();
+
+function Header({navigation}) {
   return (
     <Wrapper>
       <Container>
-        <Logo />
-        <BoxIconCart>
-          <Cart>Cart</Cart>
+        <ButtonLogo onPress={() => navigation.navigate('Home')}>
+          <Logo />
+        </ButtonLogo>
+        <BoxIconCart onPress={() => navigation.navigate('Cart')}>
+          <Icon name="shopping-basket" color="#FFF" size={24} />
           <CountItem>0</CountItem>
         </BoxIconCart>
       </Container>

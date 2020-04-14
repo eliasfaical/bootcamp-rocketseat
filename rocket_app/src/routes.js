@@ -1,48 +1,33 @@
-import React from 'react';
-import {Button, Image} from 'react-native';
+import * as React from 'react';
+
+import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import Main from './pages/Main';
 import Cart from './pages/Cart';
 
-import colors from './styles/colors';
+import Header from './components/Header';
+import {navigationRef} from './services/navigation';
 
 const Stack = createStackNavigator();
 
-function LogoTitle() {
+function Routes() {
   return (
-    <Image
-      style={{width: 185, height: 24}}
-      source={require('./assets/logo.png')}
-    />
+    <NavigationContainer ref={navigationRef}>
+      <Stack.Navigator
+        initialRouteName="Home"
+        headerMode="screen"
+        screenOptions={{
+          cardStyle: {
+            backgroundColor: '#191920',
+          },
+          header: (props) => <Header {...props} />,
+        }}>
+        <Stack.Screen name="Home" component={Main} options={{title: null}} />
+        <Stack.Screen name="Cart" component={Cart} options={{title: null}} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-export default function Routes({navigation}) {
-  return (
-    <Stack.Navigator
-      headerBackTitleVisible="false"
-      headerLayoutPreset="center"
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: colors.dark,
-        },
-        headerTintColor: '#FFF',
-      }}>
-      <Stack.Screen
-        name="Home"
-        component={(Main, Cart)}
-        options={{
-          headerTitle: (props) => <LogoTitle {...props} />,
-          headerRight: () => (
-            <Button
-              onPress={() => navigation.navigate('Cart')}
-              title="Cart"
-              color="#FFF"
-            />
-          ),
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
+export default Routes;
