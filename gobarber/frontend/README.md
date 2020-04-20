@@ -34,3 +34,6 @@ Validações
 
 Configurando Store e toda parte de Redux
 #### `yarn add redux redux-saga react-redux reactotron-redux reactotron-redux-saga immer`
+
+Redux persist (armazenando dados no storage)
+#### `yarn add redux-persist`
