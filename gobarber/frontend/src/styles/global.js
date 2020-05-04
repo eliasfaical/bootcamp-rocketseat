@@ -45,6 +45,7 @@ export default createGlobalStyle`
   body {
     line-height: 1;
     font-size: 100%;
+    font-weight: 400;
     font-family: 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
   }
