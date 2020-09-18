@@ -8,6 +8,7 @@ import SignIn from '~/pages/SignIn';
 import SignUp from '~/pages/SignUp';
 import Dashboard from '~/pages/Dashboard';
 import Profile from '~/pages/Profile';
+import NewAppointment from '~/pages/NewAppointment';
 
 const LoginStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -33,6 +34,11 @@ const Routes = () => {
             name="Dasboard"
             component={Dashboard}
             options={Dashboard.navigationOptions}
+          />
+          <Tab.Screen
+            name="NewAppointment"
+            component={NewAppointment}
+            options={NewAppointment.navigationOptions}
           />
           <Tab.Screen
             tabBarOptions={tabBarOptions}
